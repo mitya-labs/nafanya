@@ -1,0 +1,31 @@
+.DS_Store
+.env
+.venv/
+.venv-*/
+__pycache__/
+*.pyc
+*.pyo
+*.log
+
+# Vendored source and model weights
+training/vendor/
+models/
+*.gguf
+*.safetensors
+*.bin
+*.npz
+
+# Training artifacts
+training/runs/*
+!training/runs/.gitkeep
+training/data/generated/
+training/data/pilot*/
+training/data/smoke/
+training/bin/
+
+# Caches
+.cache/
+hf-cache/
+
+# Run logs: may contain phone addresses and paths
+logs/

@@ -1,0 +1,29 @@
+model: training/models/Qwen3.5-0.8B
+train: true
+data: training/data/pilot-v2
+fine_tune_type: lora
+optimizer: adam
+num_layers: 2
+lora_parameters:
+  rank: 16
+  scale: 16.0
+  dropout: 0.05
+  keys:
+    - self_attn.q_proj
+    - self_attn.v_proj
+    - mlp.gate_proj
+    - mlp.up_proj
+    - mlp.down_proj
+batch_size: 1
+iters: 100
+learning_rate: 5.0e-5
+max_seq_length: 1280
+mask_prompt: true
+grad_checkpoint: true
+clear_cache_threshold: 1
+adapter_path: training/runs/pilot-v2
+save_every: 10
+steps_per_report: 5
+steps_per_eval: 1000
+val_batches: 9
+seed: 42

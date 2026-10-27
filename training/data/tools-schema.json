@@ -1,0 +1,229 @@
+[
+  {
+    "function": {
+      "description": "Заряд батареи в процентах и состояние (заряжается/разряжается).",
+      "name": "battery_status",
+      "parameters": {
+        "properties": {},
+        "type": "object"
+      }
+    },
+    "type": "function"
+  },
+  {
+    "function": {
+      "description": "Установить яркость экрана (подсветки) в процентах (5–100): «яркость 60», «на максимум». Не громкость звука.",
+      "name": "brightness_set",
+      "parameters": {
+        "properties": {
+          "percent": {
+            "description": "яркость, 5–100",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "percent"
+        ],
+        "type": "object"
+      }
+    },
+    "type": "function"
+  },
+  {
+    "function": {
+      "description": "Сделать экран ярче или темнее на шаг, когда число не названо: «ярче», «потемнее». Не громкость звука.",
+      "name": "brightness_step",
+      "parameters": {
+        "properties": {
+          "direction": {
+            "description": "up — ярче, down — темнее",
+            "type": "string"
+          }
+        },
+        "required": [
+          "direction"
+        ],
+        "type": "object"
+      }
+    },
+    "type": "function"
+  },
+  {
+    "function": {
+      "description": "Заглушить звук (mode=on: «выключи звук», «заглуши», mute) или вернуть звук (mode=off: «включи звук», «верни звук», unmute). Уровень громкости не меняет.",
+      "name": "mute_set",
+      "parameters": {
+        "properties": {
+          "mode": {
+            "description": "on — заглушить звук, off — вернуть звук",
+            "enum": [
+              "on",
+              "off"
+            ],
+            "type": "string"
+          }
+        },
+        "required": [
+          "mode"
+        ],
+        "type": "object"
+      }
+    },
+    "type": "function"
+  },
+  {
+    "function": {
+      "description": "Не давать телефону засыпать и гасить экран (mode=on: «не давай засыпать», «запрети засыпать») или разрешить сон (mode=off: «разреши спать», «можно засыпать»).",
+      "name": "nosleep_set",
+      "parameters": {
+        "properties": {
+          "mode": {
+            "description": "on — запретить сон, off — разрешить сон",
+            "enum": [
+              "on",
+              "off"
+            ],
+            "type": "string"
+          }
+        },
+        "required": [
+          "mode"
+        ],
+        "type": "object"
+      }
+    },
+    "type": "function"
+  },
+  {
+    "function": {
+      "description": "Последние строки журнала сервиса из списка: NetworkManager, bluetooth, ModemManager, avahi-daemon, systemd-resolved, systemd-timesyncd, power-profiles-daemon.",
+      "name": "service_logs",
+      "parameters": {
+        "properties": {
+          "lines": {
+            "description": "сколько строк, по умолчанию 30, максимум 200",
+            "type": "integer"
+          },
+          "unit": {
+            "description": "имя сервиса из списка, например NetworkManager",
+            "type": "string"
+          }
+        },
+        "required": [
+          "unit"
+        ],
+        "type": "object"
+      }
+    },
+    "type": "function"
+  },
+  {
+    "function": {
+      "description": "Перезапустить сервис из белого списка: NetworkManager, bluetooth, ModemManager, avahi-daemon, systemd-resolved, systemd-timesyncd, power-profiles-daemon.",
+      "name": "service_restart",
+      "parameters": {
+        "properties": {
+          "unit": {
+            "description": "имя сервиса",
+            "type": "string"
+          }
+        },
+        "required": [
+          "unit"
+        ],
+        "type": "object"
+      }
+    },
+    "type": "function"
+  },
+  {
+    "function": {
+      "description": "Список запущенных системных сервисов («что запущено», «что крутится в системе», «какие демоны»).",
+      "name": "services_running",
+      "parameters": {
+        "properties": {},
+        "type": "object"
+      }
+    },
+    "type": "function"
+  },
+  {
+    "function": {
+      "description": "Текущая громкость в процентах и выключен ли звук.",
+      "name": "volume_get",
+      "parameters": {
+        "properties": {},
+        "type": "object"
+      }
+    },
+    "type": "function"
+  },
+  {
+    "function": {
+      "description": "Установить громкость звука в процентах (0–100): «громкость 40», «на половину», «на максимум». Не яркость экрана.",
+      "name": "volume_set",
+      "parameters": {
+        "properties": {
+          "percent": {
+            "description": "громкость, 0–100",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "percent"
+        ],
+        "type": "object"
+      }
+    },
+    "type": "function"
+  },
+  {
+    "function": {
+      "description": "Сделать звук громче или тише на шаг, когда число не названо: «погромче», «потише». Не яркость экрана.",
+      "name": "volume_step",
+      "parameters": {
+        "properties": {
+          "direction": {
+            "description": "up — громче, down — тише",
+            "type": "string"
+          }
+        },
+        "required": [
+          "direction"
+        ],
+        "type": "object"
+      }
+    },
+    "type": "function"
+  },
+  {
+    "function": {
+      "description": "Подключиться или переключиться на сохранённую Wi-Fi сеть, когда пользователь просит подключить и называет имя сети («подключись к…», «перейди на…», connect). Пароль не вводится.",
+      "name": "wifi_connect",
+      "parameters": {
+        "properties": {
+          "connection": {
+            "description": "имя сохранённого подключения из wifi_status",
+            "type": "string"
+          }
+        },
+        "required": [
+          "connection"
+        ],
+        "type": "object"
+      }
+    },
+    "type": "function"
+  },
+  {
+    "function": {
+      "description": "Только показать состояние Wi-Fi: активное подключение и список сохранённых сетей (имена для wifi_connect). Ничего не подключает.",
+      "name": "wifi_status",
+      "parameters": {
+        "properties": {},
+        "type": "object"
+      }
+    },
+    "type": "function"
+  }
+]

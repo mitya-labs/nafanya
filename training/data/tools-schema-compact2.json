@@ -1,0 +1,219 @@
+[
+  {
+    "function": {
+      "description": "Заряд батареи и состояние (заряжается/разряжается)",
+      "name": "battery_status",
+      "parameters": {
+        "properties": {},
+        "type": "object"
+      }
+    },
+    "type": "function"
+  },
+  {
+    "function": {
+      "description": "Установить яркость экрана 5–100",
+      "name": "brightness_set",
+      "parameters": {
+        "properties": {
+          "percent": {
+            "type": "integer"
+          }
+        },
+        "required": [
+          "percent"
+        ],
+        "type": "object"
+      }
+    },
+    "type": "function"
+  },
+  {
+    "function": {
+      "description": "Сделать экран ярче или темнее на шаг",
+      "name": "brightness_step",
+      "parameters": {
+        "properties": {
+          "direction": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "direction"
+        ],
+        "type": "object"
+      }
+    },
+    "type": "function"
+  },
+  {
+    "function": {
+      "description": "Заглушить (on) или вернуть звук (off)",
+      "name": "mute_set",
+      "parameters": {
+        "properties": {
+          "mode": {
+            "enum": [
+              "on",
+              "off"
+            ],
+            "type": "string"
+          }
+        },
+        "required": [
+          "mode"
+        ],
+        "type": "object"
+      }
+    },
+    "type": "function"
+  },
+  {
+    "function": {
+      "description": "Запретить сон (on) или разрешить (off)",
+      "name": "nosleep_set",
+      "parameters": {
+        "properties": {
+          "mode": {
+            "enum": [
+              "on",
+              "off"
+            ],
+            "type": "string"
+          }
+        },
+        "required": [
+          "mode"
+        ],
+        "type": "object"
+      }
+    },
+    "type": "function"
+  },
+  {
+    "function": {
+      "description": "Последние строки журнала сервиса из списка",
+      "name": "service_logs",
+      "parameters": {
+        "properties": {
+          "lines": {
+            "type": "integer"
+          },
+          "unit": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "unit"
+        ],
+        "type": "object"
+      }
+    },
+    "type": "function"
+  },
+  {
+    "function": {
+      "description": "Перезапустить сервис из списка",
+      "name": "service_restart",
+      "parameters": {
+        "properties": {
+          "unit": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "unit"
+        ],
+        "type": "object"
+      }
+    },
+    "type": "function"
+  },
+  {
+    "function": {
+      "description": "Список запущенных системных сервисов",
+      "name": "services_running",
+      "parameters": {
+        "properties": {},
+        "type": "object"
+      }
+    },
+    "type": "function"
+  },
+  {
+    "function": {
+      "description": "Текущая громкость и выключен ли звук",
+      "name": "volume_get",
+      "parameters": {
+        "properties": {},
+        "type": "object"
+      }
+    },
+    "type": "function"
+  },
+  {
+    "function": {
+      "description": "Установить громкость 0–100",
+      "name": "volume_set",
+      "parameters": {
+        "properties": {
+          "percent": {
+            "type": "integer"
+          }
+        },
+        "required": [
+          "percent"
+        ],
+        "type": "object"
+      }
+    },
+    "type": "function"
+  },
+  {
+    "function": {
+      "description": "Сделать громче или тише на шаг",
+      "name": "volume_step",
+      "parameters": {
+        "properties": {
+          "direction": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "direction"
+        ],
+        "type": "object"
+      }
+    },
+    "type": "function"
+  },
+  {
+    "function": {
+      "description": "Подключиться к сохранённой Wi-Fi сети по имени",
+      "name": "wifi_connect",
+      "parameters": {
+        "properties": {
+          "connection": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "connection"
+        ],
+        "type": "object"
+      }
+    },
+    "type": "function"
+  },
+  {
+    "function": {
+      "description": "Показать активную Wi-Fi сеть и сохранённые сети",
+      "name": "wifi_status",
+      "parameters": {
+        "properties": {},
+        "type": "object"
+      }
+    },
+    "type": "function"
+  }
+]

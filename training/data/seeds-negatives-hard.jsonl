@@ -1,0 +1,40 @@
+{"id":"tn-001","q":"вруби wifi","tool":null,"args":{},"category":"near_miss_negative","split":"train","source":"deepseek-v4.1-flash-manual","terms":"DeepSeek Open Platform ToS 2026-04-22 §4.2(3)"}
+{"id":"tn-002","q":"отключи wifi","tool":null,"args":{},"category":"near_miss_negative","split":"train","source":"deepseek-v4.1-flash-manual","terms":"DeepSeek Open Platform ToS 2026-04-22 §4.2(3)"}
+{"id":"tn-003","q":"подними wi-fi","tool":null,"args":{},"category":"near_miss_negative","split":"train","source":"deepseek-v4.1-flash-manual","terms":"DeepSeek Open Platform ToS 2026-04-22 §4.2(3)"}
+{"id":"tn-004","q":"останови bluetooth","tool":null,"args":{},"category":"near_miss_negative","split":"train","source":"deepseek-v4.1-flash-manual","terms":"DeepSeek Open Platform ToS 2026-04-22 §4.2(3)"}
+{"id":"tn-005","q":"выключи bluetooth","tool":null,"args":{},"category":"near_miss_negative","split":"train","source":"deepseek-v4.1-flash-manual","terms":"DeepSeek Open Platform ToS 2026-04-22 §4.2(3)"}
+{"id":"tn-006","q":"включи bluetooth","tool":null,"args":{},"category":"near_miss_negative","split":"train","source":"deepseek-v4.1-flash-manual","terms":"DeepSeek Open Platform ToS 2026-04-22 §4.2(3)"}
+{"id":"tn-007","q":"подключи bluetooth-колонку","tool":null,"args":{},"category":"near_miss_negative","split":"train","source":"deepseek-v4.1-flash-manual","terms":"DeepSeek Open Platform ToS 2026-04-22 §4.2(3)"}
+{"id":"tn-008","q":"рестартни ssh","tool":null,"args":{},"category":"near_miss_negative","split":"train","source":"deepseek-v4.1-flash-manual","terms":"DeepSeek Open Platform ToS 2026-04-22 §4.2(3)"}
+{"id":"tn-009","q":"рестартни sshd","tool":null,"args":{},"category":"near_miss_negative","split":"train","source":"deepseek-v4.1-flash-manual","terms":"DeepSeek Open Platform ToS 2026-04-22 §4.2(3)"}
+{"id":"tn-010","q":"логи sshd","tool":null,"args":{},"category":"near_miss_negative","split":"train","source":"deepseek-v4.1-flash-manual","terms":"DeepSeek Open Platform ToS 2026-04-22 §4.2(3)"}
+{"id":"tn-011","q":"выруби NetworkManager","tool":null,"args":{},"category":"near_miss_negative","split":"train","source":"deepseek-v4.1-flash-manual","terms":"DeepSeek Open Platform ToS 2026-04-22 §4.2(3)"}
+{"id":"tn-012","q":"рестартни все сервисы","tool":null,"args":{},"category":"near_miss_negative","split":"train","source":"deepseek-v4.1-flash-manual","terms":"DeepSeek Open Platform ToS 2026-04-22 §4.2(3)"}
+{"id":"tn-013","q":"сколько места на диске","tool":null,"args":{},"category":"out_of_scope","split":"train","source":"deepseek-v4.1-flash-manual","terms":"DeepSeek Open Platform ToS 2026-04-22 §4.2(3)"}
+{"id":"tn-014","q":"сколько оперативки свободно","tool":null,"args":{},"category":"out_of_scope","split":"train","source":"deepseek-v4.1-flash-manual","terms":"DeepSeek Open Platform ToS 2026-04-22 §4.2(3)"}
+{"id":"tn-015","q":"сколько градусов у процессора","tool":null,"args":{},"category":"out_of_scope","split":"train","source":"deepseek-v4.1-flash-manual","terms":"DeepSeek Open Platform ToS 2026-04-22 §4.2(3)"}
+{"id":"tn-016","q":"поставь будильник","tool":null,"args":{},"category":"out_of_scope","split":"train","source":"deepseek-v4.1-flash-manual","terms":"DeepSeek Open Platform ToS 2026-04-22 §4.2(3)"}
+{"id":"tn-017","q":"поставь таймер","tool":null,"args":{},"category":"out_of_scope","split":"train","source":"deepseek-v4.1-flash-manual","terms":"DeepSeek Open Platform ToS 2026-04-22 §4.2(3)"}
+{"id":"tn-018","q":"сколько времени","tool":null,"args":{},"category":"out_of_scope","split":"train","source":"deepseek-v4.1-flash-manual","terms":"DeepSeek Open Platform ToS 2026-04-22 §4.2(3)"}
+{"id":"tn-019","q":"вруби фонарь","tool":null,"args":{},"category":"near_miss_negative","split":"train","source":"deepseek-v4.1-flash-manual","terms":"DeepSeek Open Platform ToS 2026-04-22 §4.2(3)"}
+{"id":"tn-020","q":"вруби авиарежим","tool":null,"args":{},"category":"near_miss_negative","split":"train","source":"deepseek-v4.1-flash-manual","terms":"DeepSeek Open Platform ToS 2026-04-22 §4.2(3)"}
+{"id":"tn-021","q":"выруби телефон","tool":null,"args":{},"category":"near_miss_negative","split":"train","source":"deepseek-v4.1-flash-manual","terms":"DeepSeek Open Platform ToS 2026-04-22 §4.2(3)"}
+{"id":"tn-022","q":"перезагрузи телефон","tool":null,"args":{},"category":"near_miss_negative","split":"train","source":"deepseek-v4.1-flash-manual","terms":"DeepSeek Open Platform ToS 2026-04-22 §4.2(3)"}
+{"id":"tn-023","q":"запусти браузер","tool":null,"args":{},"category":"out_of_scope","split":"train","source":"deepseek-v4.1-flash-manual","terms":"DeepSeek Open Platform ToS 2026-04-22 §4.2(3)"}
+{"id":"tn-024","q":"запусти youtube","tool":null,"args":{},"category":"out_of_scope","split":"train","source":"deepseek-v4.1-flash-manual","terms":"DeepSeek Open Platform ToS 2026-04-22 §4.2(3)"}
+{"id":"tn-025","q":"набери маму","tool":null,"args":{},"category":"out_of_scope","split":"train","source":"deepseek-v4.1-flash-manual","terms":"DeepSeek Open Platform ToS 2026-04-22 §4.2(3)"}
+{"id":"tn-026","q":"отправь смс","tool":null,"args":{},"category":"out_of_scope","split":"train","source":"deepseek-v4.1-flash-manual","terms":"DeepSeek Open Platform ToS 2026-04-22 §4.2(3)"}
+{"id":"tn-027","q":"переведи фразу","tool":null,"args":{},"category":"out_of_scope","split":"train","source":"deepseek-v4.1-flash-manual","terms":"DeepSeek Open Platform ToS 2026-04-22 §4.2(3)"}
+{"id":"tn-028","q":"посчитай 17 умножить на 23","tool":null,"args":{},"category":"out_of_scope","split":"train","source":"deepseek-v4.1-flash-manual","terms":"DeepSeek Open Platform ToS 2026-04-22 §4.2(3)"}
+{"id":"tn-029","q":"напиши код","tool":null,"args":{},"category":"out_of_scope","split":"train","source":"deepseek-v4.1-flash-manual","terms":"DeepSeek Open Platform ToS 2026-04-22 §4.2(3)"}
+{"id":"tn-030","q":"сочини стишок","tool":null,"args":{},"category":"out_of_scope","split":"train","source":"deepseek-v4.1-flash-manual","terms":"DeepSeek Open Platform ToS 2026-04-22 §4.2(3)"}
+{"id":"tn-031","q":"расскажи шутку","tool":null,"args":{},"category":"out_of_scope","split":"train","source":"deepseek-v4.1-flash-manual","terms":"DeepSeek Open Platform ToS 2026-04-22 §4.2(3)"}
+{"id":"tn-032","q":"что по погоде завтра","tool":null,"args":{},"category":"out_of_scope","split":"train","source":"deepseek-v4.1-flash-manual","terms":"DeepSeek Open Platform ToS 2026-04-22 §4.2(3)"}
+{"id":"tn-033","q":"удали файлы","tool":null,"args":{},"category":"out_of_scope","split":"train","source":"deepseek-v4.1-flash-manual","terms":"DeepSeek Open Platform ToS 2026-04-22 §4.2(3)"}
+{"id":"tn-034","q":"почисти кэш","tool":null,"args":{},"category":"out_of_scope","split":"train","source":"deepseek-v4.1-flash-manual","terms":"DeepSeek Open Platform ToS 2026-04-22 §4.2(3)"}
+{"id":"tn-035","q":"сними скрин","tool":null,"args":{},"category":"out_of_scope","split":"train","source":"deepseek-v4.1-flash-manual","terms":"DeepSeek Open Platform ToS 2026-04-22 §4.2(3)"}
+{"id":"tn-036","q":"поставь программу htop","tool":null,"args":{},"category":"out_of_scope","split":"train","source":"deepseek-v4.1-flash-manual","terms":"DeepSeek Open Platform ToS 2026-04-22 §4.2(3)"}
+{"id":"tn-037","q":"смени обои","tool":null,"args":{},"category":"out_of_scope","split":"train","source":"deepseek-v4.1-flash-manual","terms":"DeepSeek Open Platform ToS 2026-04-22 §4.2(3)"}
+{"id":"tn-038","q":"сделай бэкап","tool":null,"args":{},"category":"out_of_scope","split":"train","source":"deepseek-v4.1-flash-manual","terms":"DeepSeek Open Platform ToS 2026-04-22 §4.2(3)"}
+{"id":"tn-039","q":"вруби bluetooth и подключи колонку","tool":null,"args":{},"category":"near_miss_negative","split":"train","source":"deepseek-v4.1-flash-manual","terms":"DeepSeek Open Platform ToS 2026-04-22 §4.2(3)"}
+{"id":"tn-040","q":"выключи телефон совсем","tool":null,"args":{},"category":"near_miss_negative","split":"train","source":"deepseek-v4.1-flash-manual","terms":"DeepSeek Open Platform ToS 2026-04-22 §4.2(3)"}

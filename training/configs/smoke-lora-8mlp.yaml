@@ -1,0 +1,29 @@
+model: training/models/Qwen3.5-0.8B
+train: true
+data: training/data/smoke
+fine_tune_type: lora
+optimizer: adam
+num_layers: 8
+lora_parameters:
+  rank: 8
+  scale: 16.0
+  dropout: 0.05
+  keys:
+    - self_attn.q_proj
+    - self_attn.v_proj
+    - mlp.gate_proj
+    - mlp.up_proj
+    - mlp.down_proj
+batch_size: 1
+iters: 2
+learning_rate: 1.0e-4
+max_seq_length: 2048
+mask_prompt: true
+grad_checkpoint: true
+clear_cache_threshold: 1
+adapter_path: training/runs/smoke8
+save_every: 2
+steps_per_report: 1
+steps_per_eval: 2
+val_batches: 1
+seed: 42
