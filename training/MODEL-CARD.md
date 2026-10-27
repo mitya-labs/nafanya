@@ -91,9 +91,10 @@ mute/nosleep mode, step direction) are repaired afterwards.
 | heldout-v2 | 33/40 (82%) | 40/40 (100%) |
 | 148 frozen | 131/148 (89%) | 148/148 (100%, in-sample) |
 
-78% of heldout-v3 requests never reach the model, so the average energy per query drops
-roughly by that factor. Phone run with rules: 148/148, mean 2.4 s (was 6.2 s), peak RAM
-1.71 GB; energy with rules is not measured yet. The rules are narrow by design; they do not try to understand
+78% of heldout-v3 requests never reach the model. Phone run with rules: 148/148, mean
+2.4 s (was 6.2 s), peak RAM 1.71 GB. Warm energy with rules: **8.9 J/query** for 1.7B and
+**4.4 J** for 0.8B (vs 30.7 and 15.9 J without rules) — about 0.016% and 0.008% of the
+battery per query. The rules are narrow by design; they do not try to understand
 free-form requests.
 
 ## Known limitations

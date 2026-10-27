@@ -345,7 +345,7 @@ measurement.
   model alone; heldout-v2 40/40; 148 frozen 148/148 (in-sample — the rules were derived
   from those failures). 78% of heldout-v3 requests are served without the model.
 - [x] **T9.4** Measure the phone run with rules (148 queries, peak RAM, energy) and
-  update the docs and the slot cache if anything changed. Done: phone 148/148, mean 2.4 s, peak RAM 1.71 GB; the energy run with rules is pending because the phone was charging.
+  update the docs and the slot cache if anything changed. Done: phone 148/148, mean 2.4 s, peak RAM 1.71 GB; warm energy with rules 8.9 J (1.7B) and 4.4 J (0.8B) per query.
 ## Decision rule
 
 A tuned model is adopted only if all of the following hold against the *same* model's

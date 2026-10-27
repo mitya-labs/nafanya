@@ -123,6 +123,8 @@ active window; the idle baseline is about 0.67 W.
 | nafanya-1.7b Q4_K_M | slot | 166 s | **30.7** | 26.2 | 29/30 (97%) |
 | nafanya-0.8b v2 Q4_K_M | cold | 130 s | **23.7** | — | 27/30 (90%) |
 | nafanya-0.8b v2 Q4_K_M | slot | 86 s | **15.9** | 11.5 | 27/30 (90%) |
+| nafanya-1.7b + rules | slot | 46 s | **8.9** | 7.2 | 30/30 (100%) |
+| nafanya-0.8b v2 + rules | slot | 22 s | **4.4** | 3.7 | 27/30 (90%) |
 
 The slot cache cuts about 40% of the energy per query: 49.9 → 30.7 J for 1.7B and
 23.7 → 15.9 J for 0.8B. The 0.8B costs about half the energy of the 1.7B either way,
@@ -227,8 +229,9 @@ sets mute on, the label says off).
 
 Phone run with rules (2026-10-27, nafanya-1.7b Q4_K_M, 148 queries, charging): **148/148
 (100%) tool and args**, mean **2.4 s** per query instead of 6.2 s, load 3 s, peak RAM
-**1.71 GB**. The battery did not discharge during the run because the phone was charging;
-the energy measurement with rules is still pending.
+**1.71 GB**. Warm energy with rules, unplugged, 30 queries: **8.9 J** for 1.7B and
+**4.4 J** for 0.8B — about 3.5× less than without rules, i.e. 0.016% and 0.008% of the
+battery per query, far below the 0.06% target.
 
 Because pre-routed requests do not touch the model, they cost almost no energy: with a
 63–82% rules share the average model work per query drops by the same factor. A rough estimate from the measured 30.7 J/query warm is 0.37 × 30.7 ≈ 11 J per query

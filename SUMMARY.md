@@ -105,6 +105,10 @@ are the base models.
   after it. Fresh heldout-v3: **39/40 (98%)** vs 32/40 (80%) for the model alone, and
   78% of requests never reach the model. Phone run with rules: **148/148**, mean
   2.4 s (was 6.2 s), peak RAM 1.71 GB; the energy run is pending (the phone was charging).
+- Energy with rules measured (2026-10-27, warm slot, 30 queries): 1.7B **8.9 J/query**,
+  0.8B **4.4 J/query** — about 3.5× less than without rules and far below the 0.06%
+  battery target. The remaining choice is RAM (0.92 vs 1.71 GB) against accuracy
+  (88% vs 98% on fresh sets).
 - Energy measured (2026-10-27): 1.7B **49.9 J/query**, 0.8B **23.7 J/query** on a cold
   30-query batch; the 0.8B is ~2× cheaper, mostly due to faster prefill. The battery
   percentage gauge is unreliable under load (13 points in 4.6 min), so joules are the
