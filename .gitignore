@@ -30,3 +30,5 @@ hf-cache/
 # Run logs: may contain phone addresses and paths
 logs/
 training/data/cases30.json
+# Hugging Face upload staging
+training/.hf-stage/

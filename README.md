@@ -36,6 +36,21 @@ Next: targeted training against the stable misses (line count vs `unit`, `noslee
 inversion, step vs absolute volume, `wifi_status` phrasing) and a precise battery
 comparison using current/voltage integration instead of 1% battery steps.
 
+## Publishing to Hugging Face
+
+Prepared but not uploaded (no account yet). After `python3 -m pip install -U huggingface_hub`
+and `hf auth login`:
+
+```sh
+training/scripts/upload_hf.sh 1.7b <user>/nafanya-1.7b --public
+training/scripts/upload_hf.sh 0.8b <user>/nafanya-0.8b --public
+```
+
+The script stages the PEFT adapter, the GGUF Q4_K_M, the model card
+(`training/hf/README-*.md`) and the Apache-2.0 licence. The card separates model-only
+numbers from the numbers with the agent's rules layer, and marks the training data as
+AI-generated.
+
 ## Ground rules
 
 - Do not modify `../kuzya` from this repository without an explicit task; if a tool or

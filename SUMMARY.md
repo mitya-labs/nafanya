@@ -67,6 +67,9 @@ are the base models.
   temperature 46.5 °C. 0.8B v2: **72/100 (72%)**, peak RAM **0.92 GB**, load 2 s,
   battery 77 → 69% (0.08%/query in both chunks). 0.8B generates ~2× faster but did not
   use less battery; it wins only on RAM.
+- Hugging Face publishing is prepared: model cards, Apache-2.0 licence and
+  `training/scripts/upload_hf.sh` (adapter + GGUF + card). Not uploaded — no HF account
+  yet; the cards keep model-only and rules-assisted numbers separate.
 - A fresh held-out set exists: `training/data/heldout-40.json` (40 phrasings written
   after training, no exact overlap with training data or the frozen tests). The 1.7B
   model scores **34/40 (85%)**; the 26-query subset is no longer the primary signal.
