@@ -5,6 +5,7 @@ set -eu
 cd "$HOME/kuzya"
 
 MODEL=${1:-models/nafanya-1.7b-Q4_K_M.gguf}
+FLAGS=${FLAGS:-}
 TAG=${2:-go-eval}
 BAT=/sys/class/power_supply/qcom-battery
 
@@ -30,7 +31,7 @@ for _ in $(seq 1 180); do
 done
 echo "load_seconds=$(( $(date +%s) - t0 ))"
 
-./bin/kuzya-eval -cases cases-all.json -out "eval-$TAG.jsonl" > "eval-$TAG.txt" 2>&1 || true
+./bin/kuzya-eval $FLAGS -cases cases-all.json -out "eval-$TAG.jsonl" > "eval-$TAG.txt" 2>&1 || true
 
 hwm=$(grep VmHWM "/proc/$pid/status" | awk '{print $2}')
 echo "peak_kb=$hwm"

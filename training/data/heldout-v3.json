@@ -1,0 +1,282 @@
+[
+  {
+    "id": 1,
+    "q": "сколько заряда осталось?",
+    "tool": "battery_status",
+    "args": {}
+  },
+  {
+    "id": 2,
+    "q": "аккумулятор садится?",
+    "tool": "battery_status",
+    "args": {}
+  },
+  {
+    "id": 3,
+    "q": "процент батареи покажи",
+    "tool": "battery_status",
+    "args": {}
+  },
+  {
+    "id": 4,
+    "q": "яркость 45",
+    "tool": "brightness_set",
+    "args": {
+      "percent": 45
+    }
+  },
+  {
+    "id": 5,
+    "q": "поставь яркость 90 процентов",
+    "tool": "brightness_set",
+    "args": {
+      "percent": 90
+    }
+  },
+  {
+    "id": 6,
+    "q": "сделай светлее",
+    "tool": "brightness_step",
+    "args": {
+      "direction": "up"
+    }
+  },
+  {
+    "id": 7,
+    "q": "яркость на шаг вниз",
+    "tool": "brightness_step",
+    "args": {
+      "direction": "down"
+    }
+  },
+  {
+    "id": 8,
+    "q": "приглуши экран",
+    "tool": "brightness_step",
+    "args": {
+      "direction": "down"
+    }
+  },
+  {
+    "id": 9,
+    "q": "выключи режим без звука",
+    "tool": "mute_set",
+    "args": {
+      "mode": "off"
+    }
+  },
+  {
+    "id": 10,
+    "q": "поставь беззвучный",
+    "tool": "mute_set",
+    "args": {
+      "mode": "on"
+    }
+  },
+  {
+    "id": 11,
+    "q": "пусть телефон не спит",
+    "tool": "nosleep_set",
+    "args": {
+      "mode": "on"
+    }
+  },
+  {
+    "id": 12,
+    "q": "можно спать",
+    "tool": "nosleep_set",
+    "args": {
+      "mode": "off"
+    }
+  },
+  {
+    "id": 13,
+    "q": "глянь журнал NetworkManager",
+    "tool": "service_logs",
+    "args": {
+      "unit": "NetworkManager"
+    }
+  },
+  {
+    "id": 14,
+    "q": "хвост лога bluetooth, 30 строк",
+    "tool": "service_logs",
+    "args": {
+      "unit": "bluetooth",
+      "lines": 30
+    }
+  },
+  {
+    "id": 15,
+    "q": "журнал ModemManager за 100 строк",
+    "tool": "service_logs",
+    "args": {
+      "unit": "ModemManager",
+      "lines": 100
+    }
+  },
+  {
+    "id": 16,
+    "q": "перезапусти службу avahi",
+    "tool": "service_restart",
+    "args": {
+      "unit": "avahi-daemon"
+    }
+  },
+  {
+    "id": 17,
+    "q": "рестартни systemd-timesyncd",
+    "tool": "service_restart",
+    "args": {
+      "unit": "systemd-timesyncd"
+    }
+  },
+  {
+    "id": 18,
+    "q": "что запущено в системе",
+    "tool": "services_running",
+    "args": {}
+  },
+  {
+    "id": 19,
+    "q": "громкость какая стоит",
+    "tool": "volume_get",
+    "args": {}
+  },
+  {
+    "id": 20,
+    "q": "громкость на 40",
+    "tool": "volume_set",
+    "args": {
+      "percent": 40
+    }
+  },
+  {
+    "id": 21,
+    "q": "громкость подними",
+    "tool": "volume_step",
+    "args": {
+      "direction": "up"
+    }
+  },
+  {
+    "id": 22,
+    "q": "сделай звук тише",
+    "tool": "volume_step",
+    "args": {
+      "direction": "down"
+    }
+  },
+  {
+    "id": 23,
+    "q": "подключись к сети Keenetic-9135",
+    "tool": "wifi_connect",
+    "args": {
+      "connection": "Keenetic-9135"
+    }
+  },
+  {
+    "id": 24,
+    "q": "что с wifi",
+    "tool": "wifi_status",
+    "args": {}
+  },
+  {
+    "id": 25,
+    "q": "вайфай работает?",
+    "tool": "wifi_status",
+    "args": {}
+  },
+  {
+    "id": 26,
+    "q": "яркость 10",
+    "tool": "brightness_set",
+    "args": {
+      "percent": 10
+    }
+  },
+  {
+    "id": 27,
+    "q": "какие демоны крутятся",
+    "tool": "services_running",
+    "args": {}
+  },
+  {
+    "id": 28,
+    "q": "покажи уровень громкости",
+    "tool": "volume_get",
+    "args": {}
+  },
+  {
+    "id": 29,
+    "q": "активируй вайфай",
+    "tool": null,
+    "args": {}
+  },
+  {
+    "id": 30,
+    "q": "отключи wifi",
+    "tool": null,
+    "args": {}
+  },
+  {
+    "id": 31,
+    "q": "рестартни sshd",
+    "tool": null,
+    "args": {}
+  },
+  {
+    "id": 32,
+    "q": "покажи журнал sshd",
+    "tool": null,
+    "args": {}
+  },
+  {
+    "id": 33,
+    "q": "перезапусти каждый сервис",
+    "tool": null,
+    "args": {}
+  },
+  {
+    "id": 34,
+    "q": "выключи NetworkManager",
+    "tool": null,
+    "args": {}
+  },
+  {
+    "id": 35,
+    "q": "приостанови bluetooth",
+    "tool": null,
+    "args": {}
+  },
+  {
+    "id": 36,
+    "q": "сколько будет 25 умножить на 4",
+    "tool": null,
+    "args": {}
+  },
+  {
+    "id": 37,
+    "q": "подели 100 на 4",
+    "tool": null,
+    "args": {}
+  },
+  {
+    "id": 38,
+    "q": "запусти камеру",
+    "tool": null,
+    "args": {}
+  },
+  {
+    "id": 39,
+    "q": "поставь будильник на 6",
+    "tool": null,
+    "args": {}
+  },
+  {
+    "id": 40,
+    "q": "какая погода",
+    "tool": null,
+    "args": {}
+  }
+]

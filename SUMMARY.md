@@ -96,6 +96,11 @@ are the base models.
   load 5 s, battery 69 → 58%.
 - Integrate the compact prompt/tool schema into the agent (or a separate compact runner)
   so the phone can use the tuned model at inference.
+- Rules layer added in `../kuzya/internal/rules` (2026-10-27): hard negatives and
+  obvious commands are answered without the model, known argument mistakes are repaired
+  after it. Fresh heldout-v3: **39/40 (98%)** vs 32/40 (80%) for the model alone, and
+  78% of requests never reach the model. Phone run with rules: **148/148**, mean
+  2.4 s (was 6.2 s), peak RAM 1.71 GB; the energy run is pending (the phone was charging).
 - Energy measured (2026-10-27): 1.7B **49.9 J/query**, 0.8B **23.7 J/query** on a cold
   30-query batch; the 0.8B is ~2× cheaper, mostly due to faster prefill. The battery
   percentage gauge is unreliable under load (13 points in 4.6 min), so joules are the

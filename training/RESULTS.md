@@ -191,3 +191,44 @@ Stopped early because it cannot win on the stated economy priority: 40 of 148 qu
 6–13 s per query in the server log. The full prompt is 1639 tokens and the server is
 slower than the 1.7B, so energy per query is expected to be higher, not lower.
 The Mac numbers above are complete.
+
+## Rules layer on top of the model (2026-10-27)
+
+The model fails on the same semantic classes again and again: on/off inversion for
+`mute_set`/`nosleep_set`, step vs absolute volume, a line count read as a service name,
+refusals for ssh/sshd and "all services", and no call for colloquial `wifi_status`.
+These are deterministic, so `../kuzya/internal/rules` handles them without the model:
+
+- `Refusal` — hard negatives (wifi on/off, ssh/sshd, all services, stop, arithmetic)
+  return a text refusal before any model call;
+- `Preroute` — high-confidence commands (battery, volume/brightness get/set/step,
+  mute/nosleep, service logs/restart, wifi status/connect, services) call the tool
+  directly, with numbers recognised both as digits and as words;
+- `Repair` — after the model, fixes the unit/lines of `service_logs`, mute/nosleep mode,
+  and the step direction.
+
+`kuzya-eval --rules` applies the same logic; the agent uses it by default.
+
+| Set | Model only | Model + rules | Share served by rules |
+|---|---:|---:|---:|
+| 148 frozen (in-sample for the rules) | 131/148 (89%) | **148/148 (100%)** | 93/148 (63%) |
+| heldout-40 (dev) | 34/40 (85%) | **40/40 (100%)** | 31/40 (78%) |
+| heldout-v2 | 33/40 (82%) | **40/40 (100%)** | 33/40 (82%) |
+| heldout-v3 (fresh, final) | 32/40 (80%), args 27/40 (68%) | **39/40 (98%), args 38/40 (95%)** | 31/40 (78%) |
+
+The 148 and heldout-40 numbers are optimistic because the rules were written from those
+failures. The honest estimate is **heldout-v3: 80% → 98%** (+7 tool matches, +11 argument
+matches) with 78% of requests never reaching the model. On heldout-v3 one case remains
+("активируй вайфай", fixed afterwards by adding the verb to the refusal list — that case
+is now in-sample) and one is genuinely ambiguous ("выключи режим без звука": the model
+sets mute on, the label says off).
+
+Phone run with rules (2026-10-27, nafanya-1.7b Q4_K_M, 148 queries, charging): **148/148
+(100%) tool and args**, mean **2.4 s** per query instead of 6.2 s, load 3 s, peak RAM
+**1.71 GB**. The battery did not discharge during the run because the phone was charging;
+the energy measurement with rules is still pending.
+
+Because pre-routed requests do not touch the model, they cost almost no energy: with a
+63–82% rules share the average model work per query drops by the same factor. A rough
+estimate from the measured 30.7 J/query warm is 0.37 × 30.7 ≈ 11 J per query (~0.02% of
+the battery) for a mix like the frozen set.

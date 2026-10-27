@@ -78,6 +78,24 @@ full prompt and is slower. **nafanya-1.7b stays the production default**: 30.7 J
 query is about 0.056% of the battery, inside the ≤ 0.06% target, and it is the best
 accuracy per joule among the stable options.
 
+## Agent rules layer
+
+The agent now has a deterministic layer (`kuzya/internal/rules`) that catches the
+model's stable mistakes: hard negatives are refused before the model runs, obvious
+commands are routed straight to a tool, and argument mistakes (service line count,
+mute/nosleep mode, step direction) are repaired afterwards.
+
+| Set | Model only | Model + rules |
+|---|---:|---:|
+| heldout-v3 (fresh) | 32/40 (80%), args 27/40 | **39/40 (98%), args 38/40 (95%)** |
+| heldout-v2 | 33/40 (82%) | 40/40 (100%) |
+| 148 frozen | 131/148 (89%) | 148/148 (100%, in-sample) |
+
+78% of heldout-v3 requests never reach the model, so the average energy per query drops
+roughly by that factor. Phone run with rules: 148/148, mean 2.4 s (was 6.2 s), peak RAM
+1.71 GB; energy with rules is not measured yet. The rules are narrow by design; they do not try to understand
+free-form requests.
+
 ## Known limitations
 
 - Relative vs absolute volume/brightness is still fragile: "потише", "поярче",

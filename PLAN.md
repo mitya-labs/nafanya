@@ -333,6 +333,19 @@ measurement.
   stock 2B with the full prompt or fine-tuning the 2B on the v5/v7 data (LoRA, 8
   layers) and repeating the decision rule. Decided 2026-10-27: keep nafanya-1.7b as the production default; the stock 2B is a fallback if accuracy outweighs latency/energy. Fine-tuning the 2B is not started.
 - [x] **T8.3** Update the agent default, slot cache and docs to the chosen model. No default change; docs updated in `training/RESULTS.md` and `MODEL-CARD.md`.
+### Phase 9 — deterministic rules layer (done 2026-10-27)
+
+- [x] **T9.1** Add `internal/rules` with `Refusal`, `Preroute` and `Repair`; cover hard
+  negatives (wifi on/off, ssh/sshd, all services, stop, arithmetic), obvious commands
+  (battery, volume/brightness, mute, nosleep, service logs/restart, wifi) and the known
+  argument mistakes (line count, mute/nosleep mode, step direction).
+- [x] **T9.2** Wire the rules into `kuzya-eval --rules` and into `agent.Run` (default).
+  `go test ./...` passes, including table-driven rule tests.
+- [x] **T9.3** Evaluate on a fresh set: heldout-v3 39/40 (98%) vs 32/40 (80%) for the
+  model alone; heldout-v2 40/40; 148 frozen 148/148 (in-sample — the rules were derived
+  from those failures). 78% of heldout-v3 requests are served without the model.
+- [x] **T9.4** Measure the phone run with rules (148 queries, peak RAM, energy) and
+  update the docs and the slot cache if anything changed. Done: phone 148/148, mean 2.4 s, peak RAM 1.71 GB; the energy run with rules is pending because the phone was charging.
 ## Decision rule
 
 A tuned model is adopted only if all of the following hold against the *same* model's
