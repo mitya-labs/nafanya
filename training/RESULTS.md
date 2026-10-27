@@ -215,6 +215,8 @@ These are deterministic, so `../kuzya/internal/rules` handles them without the m
 | heldout-40 (dev) | 34/40 (85%) | **40/40 (100%)** | 31/40 (78%) |
 | heldout-v2 | 33/40 (82%) | **40/40 (100%)** | 33/40 (82%) |
 | heldout-v3 (fresh, final) | 32/40 (80%), args 27/40 (68%) | **39/40 (98%), args 38/40 (95%)** | 31/40 (78%) |
+| heldout-v2, nafanya-0.8b v2 | 26/40 (65%) | 35/40 (88%), args 35/40 | ~78% |
+| heldout-v3, nafanya-0.8b v2 | 27/40 (68%) | 35/40 (88%), args 34/40 | ~78% |
 
 The 148 and heldout-40 numbers are optimistic because the rules were written from those
 failures. The honest estimate is **heldout-v3: 80% → 98%** (+7 tool matches, +11 argument
@@ -229,6 +231,8 @@ Phone run with rules (2026-10-27, nafanya-1.7b Q4_K_M, 148 queries, charging): *
 the energy measurement with rules is still pending.
 
 Because pre-routed requests do not touch the model, they cost almost no energy: with a
-63–82% rules share the average model work per query drops by the same factor. A rough
-estimate from the measured 30.7 J/query warm is 0.37 × 30.7 ≈ 11 J per query (~0.02% of
-the battery) for a mix like the frozen set.
+63–82% rules share the average model work per query drops by the same factor. A rough estimate from the measured 30.7 J/query warm is 0.37 × 30.7 ≈ 11 J per query
+(~0.02% of the battery) for a mix like the frozen set. With rules the model is called for
+only about 22% of heldout-v3 queries, so the energy difference between the 0.8B and 1.7B
+narrows: roughly 4 J vs 8 J per query, both far below the 0.06% target. The remaining
+trade-off is RAM (0.92 vs 1.71 GB) against accuracy (88% vs 98%).
