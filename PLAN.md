@@ -346,6 +346,21 @@ measurement.
   from those failures). 78% of heldout-v3 requests are served without the model.
 - [x] **T9.4** Measure the phone run with rules (148 queries, peak RAM, energy) and
   update the docs and the slot cache if anything changed. Done: phone 148/148, mean 2.4 s, peak RAM 1.71 GB; warm energy with rules 8.9 J (1.7B) and 4.4 J (0.8B) per query.
+### Phase 10 — extended rules, 0.8B v8 and the model switch (2026-10-27)
+
+- [x] **T10.1** Rules: general out-of-scope gate (camera, youtube, alarm, weather, sms,
+  calls, flashlight, browser, files, time, arithmetic), Bluetooth toggle refusal,
+  `подели` in arithmetic, `не спит` in the sleep rule; compound requests stay with the
+  model.
+- [x] **T10.2** Train the 0.8B on the merged v7 data (2 layers, 150 iterations; the GPU
+  watchdog stopped it at 75, checkpoint 75 exported).
+- [x] **T10.3** `kuzya-server` switches models: it records the running model, stops the
+  old server when `KUZYA_MODEL` differs and keeps a slot cache per model. Tested on the
+  phone (1.7B ↔ 0.8B).
+- [x] **T10.4** Fresh heldout-v4: 1.7B+rules 40/40 (args 40/40); 0.8B v8+rules 39/40
+  (args 39/40), 38/40 on heldout-v3; the 0.8B alone is 25/40.
+- [x] **T10.5** Measure the 0.8B v8 on the phone with rules and update the docs. Done: 4.1 J/query, 0.6 s per query, 26/30 on the first 30 frozen cases.
+
 ## Decision rule
 
 A tuned model is adopted only if all of the following hold against the *same* model's

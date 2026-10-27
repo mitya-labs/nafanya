@@ -96,8 +96,11 @@ are the base models.
   load 5 s, battery 69 → 58%.
 - Integrate the compact prompt/tool schema into the agent (or a separate compact runner)
   so the phone can use the tuned model at inference.
-- Rules also lift the 0.8B: 35/40 (88%) on heldout-v2 and heldout-v3, versus 65–68%
-  without rules; it stays 3–5 cases behind the 1.7B but uses 0.92 GB. With rules the
+- Rules also lift the 0.8B: the retrained v8 scores **39/40 on heldout-v4**, 38/40 on
+  heldout-v3 and 40/40 on heldout-v2 with rules (25/40 on v4 without rules), versus
+  65–68% for the old v2. The 1.7B with the same rules is 40/40 on v4 and v3. Both models
+  are selectable with `KUZYA_MODEL`; `kuzya-server` restarts itself on a model change.
+  On the phone the 0.8B v8 with rules costs 4.1 J/query warm and 0.6 s per query. With rules the
   model is called for ~22% of fresh-set queries, so energy is a few joules per query for
   both models; the real choice is RAM vs accuracy.
 - Rules layer added in `../kuzya/internal/rules` (2026-10-27): hard negatives and

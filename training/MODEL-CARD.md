@@ -88,6 +88,7 @@ mute/nosleep mode, step direction) are repaired afterwards.
 | Set | Model only | Model + rules |
 |---|---:|---:|
 | heldout-v3 (fresh) | 32/40 (80%), args 27/40 | **39/40 (98%), args 38/40 (95%)** |
+| heldout-v4 (fresh, extended rules) | — | **40/40 (100%)** |
 | heldout-v2 | 33/40 (82%) | 40/40 (100%) |
 | 148 frozen | 131/148 (89%) | 148/148 (100%, in-sample) |
 

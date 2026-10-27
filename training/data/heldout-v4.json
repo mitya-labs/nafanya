@@ -1,0 +1,284 @@
+[
+  {
+    "id": 1,
+    "q": "заряд сколько?",
+    "tool": "battery_status",
+    "args": {}
+  },
+  {
+    "id": 2,
+    "q": "сколько процентов на батарее",
+    "tool": "battery_status",
+    "args": {}
+  },
+  {
+    "id": 3,
+    "q": "батарея разряжена?",
+    "tool": "battery_status",
+    "args": {}
+  },
+  {
+    "id": 4,
+    "q": "яркость 35",
+    "tool": "brightness_set",
+    "args": {
+      "percent": 35
+    }
+  },
+  {
+    "id": 5,
+    "q": "сделай яркость 80",
+    "tool": "brightness_set",
+    "args": {
+      "percent": 80
+    }
+  },
+  {
+    "id": 6,
+    "q": "экран поярче",
+    "tool": "brightness_step",
+    "args": {
+      "direction": "up"
+    }
+  },
+  {
+    "id": 7,
+    "q": "сделай темнее экран",
+    "tool": "brightness_step",
+    "args": {
+      "direction": "down"
+    }
+  },
+  {
+    "id": 8,
+    "q": "притуши подсветку",
+    "tool": "brightness_step",
+    "args": {
+      "direction": "down"
+    }
+  },
+  {
+    "id": 9,
+    "q": "включи беззвучный",
+    "tool": "mute_set",
+    "args": {
+      "mode": "on"
+    }
+  },
+  {
+    "id": 10,
+    "q": "верни звук обратно",
+    "tool": "mute_set",
+    "args": {
+      "mode": "off"
+    }
+  },
+  {
+    "id": 11,
+    "q": "не выключай экран",
+    "tool": "nosleep_set",
+    "args": {
+      "mode": "on"
+    }
+  },
+  {
+    "id": 12,
+    "q": "пусть засыпает",
+    "tool": "nosleep_set",
+    "args": {
+      "mode": "off"
+    }
+  },
+  {
+    "id": 13,
+    "q": "покажи журнал networkmanager",
+    "tool": "service_logs",
+    "args": {
+      "unit": "NetworkManager"
+    }
+  },
+  {
+    "id": 14,
+    "q": "20 строк лога bluetooth",
+    "tool": "service_logs",
+    "args": {
+      "unit": "bluetooth",
+      "lines": 20
+    }
+  },
+  {
+    "id": 15,
+    "q": "журнал avahi, 10 строк",
+    "tool": "service_logs",
+    "args": {
+      "unit": "avahi-daemon",
+      "lines": 10
+    }
+  },
+  {
+    "id": 16,
+    "q": "перезапусти modemmanager",
+    "tool": "service_restart",
+    "args": {
+      "unit": "ModemManager"
+    }
+  },
+  {
+    "id": 17,
+    "q": "рестарт службы bluetooth",
+    "tool": "service_restart",
+    "args": {
+      "unit": "bluetooth"
+    }
+  },
+  {
+    "id": 18,
+    "q": "что крутится в системе",
+    "tool": "services_running",
+    "args": {}
+  },
+  {
+    "id": 19,
+    "q": "какой уровень громкости",
+    "tool": "volume_get",
+    "args": {}
+  },
+  {
+    "id": 20,
+    "q": "громкость 65",
+    "tool": "volume_set",
+    "args": {
+      "percent": 65
+    }
+  },
+  {
+    "id": 21,
+    "q": "громче немного",
+    "tool": "volume_step",
+    "args": {
+      "direction": "up"
+    }
+  },
+  {
+    "id": 22,
+    "q": "потише сделай",
+    "tool": "volume_step",
+    "args": {
+      "direction": "down"
+    }
+  },
+  {
+    "id": 23,
+    "q": "на сеть Keenetic-9135 перейди",
+    "tool": "wifi_connect",
+    "args": {
+      "connection": "Keenetic-9135"
+    }
+  },
+  {
+    "id": 24,
+    "q": "покажи wifi",
+    "tool": "wifi_status",
+    "args": {}
+  },
+  {
+    "id": 25,
+    "q": "вайфай есть?",
+    "tool": "wifi_status",
+    "args": {}
+  },
+  {
+    "id": 26,
+    "q": "какие службы запущены",
+    "tool": "services_running",
+    "args": {}
+  },
+  {
+    "id": 27,
+    "q": "поставь громкость 25",
+    "tool": "volume_set",
+    "args": {
+      "percent": 25
+    }
+  },
+  {
+    "id": 28,
+    "q": "яркость 55 процентов",
+    "tool": "brightness_set",
+    "args": {
+      "percent": 55
+    }
+  },
+  {
+    "id": 29,
+    "q": "открой телеграм",
+    "tool": null,
+    "args": {}
+  },
+  {
+    "id": 30,
+    "q": "включи камеру",
+    "tool": null,
+    "args": {}
+  },
+  {
+    "id": 31,
+    "q": "поставь будильник",
+    "tool": null,
+    "args": {}
+  },
+  {
+    "id": 32,
+    "q": "время не подскажешь",
+    "tool": null,
+    "args": {}
+  },
+  {
+    "id": 33,
+    "q": "погода сегодня как",
+    "tool": null,
+    "args": {}
+  },
+  {
+    "id": 34,
+    "q": "позвони в скорую",
+    "tool": null,
+    "args": {}
+  },
+  {
+    "id": 35,
+    "q": "фонарь нужен",
+    "tool": null,
+    "args": {}
+  },
+  {
+    "id": 36,
+    "q": "перезагрузи sshd-демон",
+    "tool": null,
+    "args": {}
+  },
+  {
+    "id": 37,
+    "q": "активируй wifi",
+    "tool": null,
+    "args": {}
+  },
+  {
+    "id": 38,
+    "q": "отключи блютуз",
+    "tool": null,
+    "args": {}
+  },
+  {
+    "id": 39,
+    "q": "приостанови блютуз",
+    "tool": null,
+    "args": {}
+  },
+  {
+    "id": 40,
+    "q": "посчитай 99 разделить на 9",
+    "tool": null,
+    "args": {}
+  }
+]

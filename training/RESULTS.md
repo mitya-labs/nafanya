@@ -239,3 +239,34 @@ Because pre-routed requests do not touch the model, they cost almost no energy: 
 only about 22% of heldout-v3 queries, so the energy difference between the 0.8B and 1.7B
 narrows: roughly 4 J vs 8 J per query, both far below the 0.06% target. The remaining
 trade-off is RAM (0.92 vs 1.71 GB) against accuracy (88% vs 98%).
+
+## Extended rules and nafanya-0.8b v8 (2026-10-27)
+
+Two additions after the first rules layer:
+
+- the rules got a general out-of-scope gate (camera, youtube, alarm, weather, sms,
+  calls, flashlight, browser, files, time, arithmetic), a Bluetooth toggle refusal,
+  `подели` in the arithmetic rule, and `не спит` in the sleep rule. Compound requests
+  with «и» are deliberately left to the model.
+- the 0.8B was trained on the merged v7 data (831 rows, 2 layers, 150 iterations; the
+  GPU watchdog stopped it at 75, checkpoint 75 was exported).
+
+Fresh held-out v4 (40 new phrasings, never used before):
+
+| Model + rules | heldout-v4 | heldout-v3 | heldout-v2 |
+|---|---:|---:|---:|
+| nafanya-1.7b | **40/40 (100%)**, args 40/40 | **40/40**, args 39/40 | — |
+| nafanya-0.8b v8 | 39/40 (98%), args 39/40 | 38/40 (95%), args 38/40 | 40/40 (100%) |
+| nafanya-0.8b v2 | — | — | 35/40 (88%) |
+
+The 0.8B model alone on v4 is weak (25/40, 62%), but the rules layer covers the
+out-of-scope and argument classes, so the combined system is close to the 1.7B: 39/40 vs
+40/40 on v4 and 38/40 vs 40/40 on v3. The remaining 0.8B errors are free-form positives
+and one ambiguous phrase.
+
+On the phone the 0.8B v8 with rules costs **4.1 J/query** warm (0.6 s per query, 26/30
+on the first 30 frozen cases), the same as the old v2 (4.4 J) but much more accurate on
+fresh sets.
+
+Both models are now switchable: `KUZYA_MODEL=nafanya-1.7b-Q4_K_M` (default) or
+`nafanya-0.8b-Q4_K_M`; `kuzya-server` restarts itself when the model changes.
