@@ -112,14 +112,21 @@ training or checkpoint selection.
 ## Energy per query (2026-10-27)
 
 Protocol: `training/scripts/phone_energy_eval.sh`, 30 queries (`cases30.json`, the first
-30 frozen cases), screen idle, no slot cache — every run pays the cold prompt prefill.
+30 frozen cases), screen idle. Cold rows start the server without a cache, so they pay
+the prompt prefill; slot rows restore the saved `kuzya-server` cache.
 Power is sampled at 1 Hz from `current_now` × `voltage_now` and integrated over the
 active window; the idle baseline is about 0.67 W.
 
-| Model | Wall time | J per query (total) | J per query (above idle) | Accuracy on 30 |
-|---|---:|---:|---:|---:|
-| nafanya-1.7b Q4_K_M | 275 s | **49.9** | 43.9 | 29/30 (97%) |
-| nafanya-0.8b v2 Q4_K_M | 130 s | **23.7** | — | 27/30 (90%) |
+| Model | Cache | Wall time | J per query | Above idle | Accuracy on 30 |
+|---|---|---:|---:|---:|---:|
+| nafanya-1.7b Q4_K_M | cold | 275 s | **49.9** | 43.9 | 29/30 (97%) |
+| nafanya-1.7b Q4_K_M | slot | 166 s | **30.7** | 26.2 | 29/30 (97%) |
+| nafanya-0.8b v2 Q4_K_M | cold | 130 s | **23.7** | — | 27/30 (90%) |
+| nafanya-0.8b v2 Q4_K_M | slot | 86 s | **15.9** | 11.5 | 27/30 (90%) |
+
+The slot cache cuts about 40% of the energy per query: 49.9 → 30.7 J for 1.7B and
+23.7 → 15.9 J for 0.8B. The 0.8B costs about half the energy of the 1.7B either way,
+and is about twice as fast (2.9 s vs 5.5 s per query warm).
 
 The 0.8B model costs about half the energy per query, mostly because its prompt prefill
 and generation are 2–3× faster. The cold prefill dominates a 30-query batch: on the
@@ -129,3 +136,58 @@ cache, so steady-state cost per query is lower than these numbers.
 Caveat: the battery percentage gauge disagrees with the integration (it dropped 13
 points in 4.6 min during the 1.7B run, which would imply about 25 W — impossible for
 this phone). The gauge is treated as unreliable under sustained load; use joules.
+
+## Baseline check: Qwen3.5-2B without tuning (2026-10-27)
+
+The 2B model was the "upper bound" in the early plan but had never been measured on the
+new held-out sets. Q4_K_M, llama-server, temperature 0:
+
+| Prompt | heldout-v2 | heldout-40 | 26 subset |
+|---|---|---|---|
+| full 1639 tokens | **34/40 (85%)**, args 33/40 | **34/40 (85%)**, args 33/40 | **23/26 (88%)**, args 23/26 |
+| compact 1118 tokens | 32/40 (80%), args 26/40 | 34/40 (85%), args 28/40 | 21/26 (81%), args 15/26 |
+
+For comparison, nafanya-1.7b v1 on the compact prompt: 33/40, 34/40 and 20/26. The
+untuned 2B with the full prompt is therefore equal or slightly better on all three sets,
+and clearly better on arguments on the hard subset. It needs the full prompt: the
+compact one costs 5–8 argument matches on the subset and the final set.
+
+This does not meet the decision rule's spirit — the tuned 1.7B does not beat the
+prompt-only larger baseline. The next step is a phone run of 2B + full prompt (peak RAM,
+load, battery) before revisiting the model choice.
+
+## Fresh-set comparison (2026-10-27)
+
+All numbers are GGUF Q4_K_M with the prompt each model needs, temperature 0.
+
+| Model | Prompt | heldout-v2 (final) | heldout-40 (dev) | 26 subset | Peak RAM | Warm energy |
+|---|---|---|---:|---:|---:|---:|
+| nafanya-1.7b v1 | compact | 33/40 (82%) | 34/40 (85%) | 20/26 (77%) | 1.71 GB | 30.7 J |
+| nafanya-0.8b v2 | compact | 26/40 (65%) | 27/40 (68%) | 18/26 (69%) | **0.92 GB** | **15.9 J** |
+| Qwen3.5-2B | full | **34/40 (85%)** | **34/40 (85%)** | **23/26 (88%)** | 1.63 GB | not measured |
+
+The frozen 148-query set flatters the 0.8B (74%); on fresh phrasings it drops to 65–68%.
+The 1.7B holds 82–85%, and the untuned 2B is equal or slightly better but needs the full
+prompt and is slower per query.
+
+## 0.8B capacity experiment (2026-10-27)
+
+The 0.8B model was limited to 2 LoRA layers at 1280 tokens. Tried more capacity:
+
+- 4 layers at 1024 tokens: loss went to NaN. Cause: every training example is 1108–1164
+  tokens, so 1024 truncates all of them and removes the assistant target.
+- 3 layers at 1280 tokens, lr 5e-5: trained, but the loss jumped 0.118 → 0.943 at
+  iteration 40 and the run crashed on the GPU watchdog. Checkpoint 30 scored 26/40 on
+  heldout-40 (65%), checkpoint 40 scored 17/40 (42%) — both worse than the 2-layer v2
+  (27/40, 68%).
+
+Conclusion: 2 layers is the stable maximum for this model on the 16 GB Mac; more capacity
+hurts. The v2 adapter stays.
+
+## Qwen3.5-2B phone check (partial, 2026-10-27)
+
+Stopped early because it cannot win on the stated economy priority: 40 of 148 queries,
+37 correct (92%), peak RAM 1,632,716 KB, load 4 s, battery 39 → 31% and 46 °C, with
+6–13 s per query in the server log. The full prompt is 1639 tokens and the server is
+slower than the 1.7B, so energy per query is expected to be higher, not lower.
+The Mac numbers above are complete.

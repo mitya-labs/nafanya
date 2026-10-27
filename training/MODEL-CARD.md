@@ -44,9 +44,10 @@ use the held-out 40 for honest comparisons.
 | nafanya-1.7b Q4_K_M (kuzya Go binary) | 148 | 131/148 (89%) | 1.71 GB | 5 s | 69 → 58% | 47.3 °C |
 | nafanya-0.8b v2 Q4_K_M | 100 | 72/100 (72%) | 0.92 GB | 2 s | 77 → 69% | 43.5 °C |
 
-Energy per query (30 frozen queries, cold start, no slot cache): **49.9 J** for 1.7B vs
-**23.7 J** for 0.8B v2, measured by integrating `current_now` × `voltage_now`
-(`training/scripts/phone_energy_eval.sh`). The 0.8B is about twice as cheap, mostly
+Energy per query (30 frozen queries): **49.9 J** cold / **30.7 J** with a restored slot
+cache for 1.7B; **23.7 J** cold / **15.9 J** warm for 0.8B v2, measured by integrating
+`current_now` × `voltage_now` (`training/scripts/phone_energy_eval.sh`,
+`phone_energy_warm.sh`). The 0.8B is about twice as cheap, mostly
 because its prefill is 2–3× faster. The percentage gauge disagrees with the integration
 and is treated as unreliable under sustained load.
 
@@ -62,6 +63,20 @@ same 131/148, so integration into the agent does not lose accuracy.
 Other checkpoints: 1.7B v2 checkpoint 150 scored 22/26 on the hard subset in MLX BF16
 but only 18/26 after GGUF export (F16 and Q4_K_M alike) and 32/40 on the held-out set,
 so it is not an improvement over the 100-iteration adapter.
+
+## Alternatives considered (2026-10-27)
+
+| Model | Prompt | heldout-v2 | heldout-40 | 26 subset | Peak RAM | Warm energy |
+|---|---|---|---:|---:|---:|---:|
+| nafanya-1.7b v1 | compact | 33/40 | 34/40 | 20/26 | 1.71 GB | 30.7 J |
+| nafanya-0.8b v2 | compact | 26/40 | 27/40 | 18/26 | 0.92 GB | 15.9 J |
+| Qwen3.5-2B stock | full | 34/40 | 34/40 | 23/26 | 1.63 GB | not measured |
+
+The 0.8B is about twice as cheap but falls to 65–68% on fresh phrasings; more LoRA layers
+(3–4) diverged or scored worse. The stock 2B is equal or slightly better but needs the
+full prompt and is slower. **nafanya-1.7b stays the production default**: 30.7 J per
+query is about 0.056% of the battery, inside the ≤ 0.06% target, and it is the best
+accuracy per joule among the stable options.
 
 ## Known limitations
 

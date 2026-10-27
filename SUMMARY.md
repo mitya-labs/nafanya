@@ -100,8 +100,13 @@ are the base models.
   30-query batch; the 0.8B is ~2× cheaper, mostly due to faster prefill. The battery
   percentage gauge is unreliable under load (13 points in 4.6 min), so joules are the
   metric. Warm/slot-cache measurement is still pending.
-- Further accuracy work on the semantic confusions needs a different approach than more
-  paraphrases: consider a larger base model or rule-based post-checks in the agent.
+- Fresh-set check changes the economy picture: on heldout-v2/heldout-40 the 0.8B v2 scores
+  only 65–68% (the frozen set's 74% was optimistic), while 1.7B holds 82–85%. More LoRA
+  layers on 0.8B (3–4) diverged or scored worse, so its capacity ceiling is reached.
+  Economy decision: **1.7B stays the production default** — 30.7 J/query is 0.056% of the
+  battery, inside the ≤0.06% target, and it is far more reliable; 0.8B remains a
+  memory-only fallback. Untuned Qwen3.5-2B is equal or better (34/40 both sets) but needs
+  the full prompt and is slower; its phone energy was not measured.
 - Update `training/RESULTS.md` and `PLAN.md` with the final choice.
 
 Detailed tasks, gates and the decision rule: `PLAN.md`.

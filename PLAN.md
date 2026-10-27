@@ -324,6 +324,15 @@ measurement.
 - [x] **T7.4** If v7 passes T7.1, export to GGUF Q4_K_M, run the full 148-query set on the
   phone, update `RESULTS.md`, `MODEL-CARD.md`, `SUMMARY.md` and the slot cache; otherwise
   keep nafanya-1.7b v1 and document the negative result. Done: v7 did not pass, v1 stays; negative result recorded in `training/RESULTS.md`.
+### Phase 8 — revisit the model choice (started 2026-10-27)
+
+- [x] **T8.1** Qwen3.5-2B Q4_K_M prompt-only with the full prompt scored 34/40 on
+  heldout-v2, 34/40 on heldout-40 and 23/26 on the subset — equal or better than
+  nafanya-1.7b. Measure it on the phone: 148 queries, peak RAM, load, battery/energy. Done on Mac (2B full prompt: 34/40 heldout-v2, 34/40 dev, 23/26 subset, 1.63 GB); the phone run was stopped at 40/148 because it is slower and cannot save energy.
+- [x] **T8.2** If 2B wins with acceptable RAM and energy, decide between shipping the
+  stock 2B with the full prompt or fine-tuning the 2B on the v5/v7 data (LoRA, 8
+  layers) and repeating the decision rule. Decided 2026-10-27: keep nafanya-1.7b as the production default; the stock 2B is a fallback if accuracy outweighs latency/energy. Fine-tuning the 2B is not started.
+- [x] **T8.3** Update the agent default, slot cache and docs to the chosen model. No default change; docs updated in `training/RESULTS.md` and `MODEL-CARD.md`.
 ## Decision rule
 
 A tuned model is adopted only if all of the following hold against the *same* model's
