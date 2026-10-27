@@ -17,7 +17,7 @@ tags:
 
 The memory-first variant of **nafanya**, a Russian tool-calling model for the offline
 **kuzya** agent on a phone (Poco F1, skladenOS). Fine-tuned from `Qwen/Qwen3.5-0.8B`;
-runs as a 543 MB GGUF through `llama-server`.
+runs as a 505 MB GGUF Q4_K_M through `llama-server`.
 
 ## What it is
 

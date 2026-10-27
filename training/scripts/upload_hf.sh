@@ -47,7 +47,7 @@ du -sh "$STAGE"
 
 PRIVATE=--private
 [ "$VIS" = "--public" ] && PRIVATE=--public
-"$CLI" repo create "$REPO" --repo-type model "$PRIVATE" -y 2>/dev/null || true
-"$CLI" upload "$REPO" "$STAGE" --repo-type model
+"$CLI" repos create "$REPO" --type model "$PRIVATE" --exist-ok 2>/dev/null || true
+"$CLI" upload "$REPO" "$STAGE" --type model
 
 echo "готово: https://huggingface.co/$REPO"
