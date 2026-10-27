@@ -72,3 +72,8 @@ rules (30.7 J without rules), mean 2.4 s per query with rules.
   no personal data.
 - DeepSeek is mentioned only as the data source; this model is not affiliated with or
   endorsed by DeepSeek.
+
+## Links
+
+- Agent: https://github.com/mitya-labs/kuzya
+- Training workspace: https://github.com/mitya-labs/nafanya

@@ -12,6 +12,14 @@ data, LoRA fine-tuning, GGUF export and on-device evaluation.
 The agent, its tools and its tests stay in `../kuzya`. This repository is intentionally
 separate so that datasets, adapters and model weights do not pollute the agent repo.
 
+## Models on Hugging Face
+
+- [nafanya-1.7b](https://huggingface.co/MityaLabs/nafanya-1.7b) — PEFT adapter + GGUF Q4_K_M
+- [nafanya-0.8b](https://huggingface.co/MityaLabs/nafanya-0.8b) — PEFT adapter + GGUF Q4_K_M
+
+Both are public, Apache-2.0. The cards separate model-only metrics from metrics with the
+agent's rules layer.
+
 ## Layout
 
 | Path | Purpose |

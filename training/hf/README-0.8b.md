@@ -61,3 +61,8 @@ and argument repair live in the `kuzya` agent.
   DeepSeek Open Platform Terms of Service (release 2026-04-22, §4.2(3)). It is
   **AI-generated**; no phone data, no personal data.
 - DeepSeek is mentioned only as the data source; no affiliation or endorsement.
+
+## Links
+
+- Agent: https://github.com/mitya-labs/kuzya
+- Training workspace: https://github.com/mitya-labs/nafanya
