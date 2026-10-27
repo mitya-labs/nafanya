@@ -1,0 +1,40 @@
+{"id": "v7-001", "q": "дай 100 строк журнала bluetooth", "tool": "service_logs", "args": {"unit": "bluetooth", "lines": 100}}
+{"id": "v7-002", "q": "журнал блютуза, последние сто строк", "tool": "service_logs", "args": {"unit": "bluetooth", "lines": 100}}
+{"id": "v7-003", "q": "покажи 20 строк лога ModemManager", "tool": "service_logs", "args": {"unit": "ModemManager", "lines": 20}}
+{"id": "v7-004", "q": "ModemManager, последние 50 строк журнала", "tool": "service_logs", "args": {"unit": "ModemManager", "lines": 50}}
+{"id": "v7-005", "q": "глянь 15 строк журнала avahi", "tool": "service_logs", "args": {"unit": "avahi-daemon", "lines": 15}}
+{"id": "v7-006", "q": "журнал NetworkManager, строк 40", "tool": "service_logs", "args": {"unit": "NetworkManager", "lines": 40}}
+{"id": "v7-007", "q": "пусть телефон опять засыпает", "tool": "nosleep_set", "args": {"mode": "off"}}
+{"id": "v7-008", "q": "можно снова уходить в сон", "tool": "nosleep_set", "args": {"mode": "off"}}
+{"id": "v7-009", "q": "сними запрет сна", "tool": "nosleep_set", "args": {"mode": "off"}}
+{"id": "v7-010", "q": "верни обычный режим сна", "tool": "nosleep_set", "args": {"mode": "off"}}
+{"id": "v7-011", "q": "пусть экран снова гаснет", "tool": "nosleep_set", "args": {"mode": "off"}}
+{"id": "v7-012", "q": "теперь пусть засыпает", "tool": "nosleep_set", "args": {"mode": "off"}}
+{"id": "v7-013", "q": "запрети экрану гаснуть", "tool": "nosleep_set", "args": {"mode": "on"}}
+{"id": "v7-014", "q": "не давай телефону уходить в сон", "tool": "nosleep_set", "args": {"mode": "on"}}
+{"id": "v7-015", "q": "размуть телефон", "tool": "mute_set", "args": {"mode": "off"}}
+{"id": "v7-016", "q": "сними беззвучный режим", "tool": "mute_set", "args": {"mode": "off"}}
+{"id": "v7-017", "q": "верни звук на телефоне", "tool": "mute_set", "args": {"mode": "off"}}
+{"id": "v7-018", "q": "поставь телефон на беззвучный", "tool": "mute_set", "args": {"mode": "on"}}
+{"id": "v7-019", "q": "выруби звук", "tool": "mute_set", "args": {"mode": "on"}}
+{"id": "v7-020", "q": "уменьши громкость до 15 процентов", "tool": "volume_set", "args": {"percent": 15}}
+{"id": "v7-021", "q": "громкость ровно 45", "tool": "volume_set", "args": {"percent": 45}}
+{"id": "v7-022", "q": "добавь громкости", "tool": "volume_step", "args": {"direction": "up"}}
+{"id": "v7-023", "q": "слишком шумно", "tool": "volume_step", "args": {"direction": "down"}}
+{"id": "v7-024", "q": "убавь яркость экрана", "tool": "brightness_step", "args": {"direction": "down"}}
+{"id": "v7-025", "q": "сделай экран тусклее", "tool": "brightness_step", "args": {"direction": "down"}}
+{"id": "v7-026", "q": "как там вафля", "tool": "wifi_status", "args": {}}
+{"id": "v7-027", "q": "вайфай ловит?", "tool": "wifi_status", "args": {}}
+{"id": "v7-028", "q": "к какой сети wifi подключён", "tool": "wifi_status", "args": {}}
+{"id": "v7-029", "q": "вруби Keenetic-9135", "tool": "wifi_connect", "args": {"connection": "Keenetic-9135"}}
+{"id": "v7-030", "q": "сделай активной Keenetic-9135", "tool": "wifi_connect", "args": {"connection": "Keenetic-9135"}}
+{"id": "v7-031", "q": "сколько сейчас громкость", "tool": "volume_get", "args": {}}
+{"id": "v7-032", "q": "сделай рестарт блютуза", "tool": "service_restart", "args": {"unit": "bluetooth"}}
+{"id": "v7-033", "q": "перезапусти sshd-сервис", "tool": null, "args": {}}
+{"id": "v7-034", "q": "журнал sshd", "tool": null, "args": {}}
+{"id": "v7-035", "q": "вруби wi-fi", "tool": null, "args": {}}
+{"id": "v7-036", "q": "отключи wi-fi совсем", "tool": null, "args": {}}
+{"id": "v7-037", "q": "перезапусти вообще всё", "tool": null, "args": {}}
+{"id": "v7-038", "q": "посчитай 48 разделить на 6", "tool": null, "args": {}}
+{"id": "v7-039", "q": "выключи службу bluetooth", "tool": null, "args": {}}
+{"id": "v7-040", "q": "чему равна громкость", "tool": "volume_get", "args": {}}

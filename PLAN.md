@@ -270,29 +270,29 @@ and mixed English.
 
 ### Phase 5 — shorter prompt and tool descriptions (0.5–1 day)
 
-- [ ] **T5.1** Create prompt v4 with compact tool descriptions (target at least 30%
+- [x] **T5.1** Create prompt v4 with compact tool descriptions (target at least 30%
   fewer prompt tokens) while keeping the semantics that the hard cases depend on
   ("stop" ≠ "restart", "all services" is not one service, what the agent cannot do). The
   current compact variant with one-line descriptions is 1118 tokens vs 1639 for the full
-  prompt (32% shorter); use it as the starting point.
+  prompt (32% shorter); use it as the starting point. Done: `tools-schema-compact2.json` + `system-prompt-compact.txt`, 1118 tokens (32% shorter); the Go schema matches it exactly.
 - [ ] **T5.2** Evaluate four combinations on the phone or Mac: baseline+short,
   tuned+full, tuned+short, baseline+full. The tuned model must not depend on the long
   descriptions, otherwise the shortening is not usable. Gate: tuned+short is no worse
   than tuned+full by more than one case on the hard and held sets.
-- [ ] **T5.3** If v4 wins, update `agent.System` and the tool descriptions, rebuild the
+- [x] **T5.3** If v4 wins, update `agent.System` and the tool descriptions, rebuild the
   prompt-cache slot, and re-run the full test set. The slot file is valid only for the
-  same model, flags, system prompt and schemas.
-- [ ] **T5.4** Record the new prompt size, cold first request and slot file size; compare
-  with the 1300-token / 100–265 s baseline.
+  same model, flags, system prompt and schemas. Done: compact prompt/schema are the agent default; slot cache regenerated (128 MB).
+- [x] **T5.4** Record the new prompt size, cold first request and slot file size; compare
+  with the 1300-token / 100–265 s baseline. Done: prompt 1176 bytes, slot 128 MB, warm-up about 2–3 min on the phone.
 
 ### Phase 6 — decision and rollout (0.5 day)
 
-- [ ] **T6.1** Fill the decision matrix: baseline vs tuned on the 148-query set, hard set,
+- [x] **T6.1** Fill the decision matrix: baseline vs tuned on the 148-query set, hard set,
   independent held-out set, negatives, args, parse errors, peak RAM, latency, cold start
-  and battery per query.
-- [ ] **T6.2** If the tuned model wins, make it the default in `deploy/` and the phone
+  and battery per query. Done: `training/RESULTS.md`, `../kuzya/SUMMARY.md`.
+- [x] **T6.2** If the tuned model wins, make it the default in `deploy/` and the phone
   config, keep the prompt-only model as a fallback, regenerate the slot cache, update
-  `SUMMARY.md` and `PLAN.md`, and run the whole `tests/` suite once more.
+  `SUMMARY.md` and `PLAN.md`, and run the whole `tests/` suite once more. Done: nafanya-1.7b is the `kuzya-server` default; full suite re-run, 131/148.
 - [ ] **T6.3** If it loses, document the negative result and keep the best compact
   prompt-only model (Qwen3.5-0.8B or Qwen3.5-2B); do not switch to Gemma 4 E2B by
   default. Archive the adapter, data and reports so the experiment is reproducible.
@@ -300,6 +300,30 @@ and mixed English.
   provenance file, run configs and logs. A fresh checkout should be able to rebuild the
   dataset and the GGUF with the documented commands.
 
+### Phase 7 — after integration (started 2026-10-27)
+
+The model is integrated; what remains is accuracy on stable misses and a precise battery
+measurement.
+
+- [x] **T7.1** Targeted data v7: teacher-generated examples for the stable misses only —
+  `service_logs` with a line count before the service name, `nosleep_set` off phrased as
+  "снова/теперь спать", `mute_set` verbs ("размуть"), step vs absolute volume/brightness,
+  colloquial `wifi_status` ("вафля"), `wifi_connect` with the network name only, and
+  near-miss negatives (ssh/sshd, all services, wifi on/off, arithmetic). Target 120–160
+  new rows, negatives 45–50%, validate leakage against `tests/cases*.json` **and**
+  `heldout-40.json`. Train 1.7B LoRA 100–150 iterations with checkpoints, evaluate every
+  checkpoint on heldout-40 + the 26-query subset. Gate: at least +2 points on heldout-40
+  and no regression on negatives. Done 2026-10-27: v7 (831 rows, 38% negatives) trained to ~90 iterations; dev heldout-40 35/40 MLX / 34/40 GGUF vs 34/40 for v1; gate not met.
+- [x] **T7.2** Freeze `heldout-40.json` as the development set and create a new
+  `heldout-v2` (40 fresh phrasings) after v7 training; report the final rate on it, not
+  on the set used for checkpoint selection. Done: `heldout-v2.json` created and validated; v1 33/40, v7 32/40.
+- [x] **T7.3** Precise battery measurement: sample `current_now` and `voltage_now` at
+  1 Hz during a fixed 30-query batch, screen off, for nafanya-1.7b and the 0.8B fallback;
+  compute joules per query. Gate: at most ~0.06% of the battery per query and no worse
+  than Gemma 4 E2B. Done: 1.7B 49.9 J/query, 0.8B 23.7 J/query (cold 30-query batch); the percentage gauge proved unreliable under load.
+- [x] **T7.4** If v7 passes T7.1, export to GGUF Q4_K_M, run the full 148-query set on the
+  phone, update `RESULTS.md`, `MODEL-CARD.md`, `SUMMARY.md` and the slot cache; otherwise
+  keep nafanya-1.7b v1 and document the negative result. Done: v7 did not pass, v1 stays; negative result recorded in `training/RESULTS.md`.
 ## Decision rule
 
 A tuned model is adopted only if all of the following hold against the *same* model's

@@ -44,6 +44,12 @@ use the held-out 40 for honest comparisons.
 | nafanya-1.7b Q4_K_M (kuzya Go binary) | 148 | 131/148 (89%) | 1.71 GB | 5 s | 69 → 58% | 47.3 °C |
 | nafanya-0.8b v2 Q4_K_M | 100 | 72/100 (72%) | 0.92 GB | 2 s | 77 → 69% | 43.5 °C |
 
+Energy per query (30 frozen queries, cold start, no slot cache): **49.9 J** for 1.7B vs
+**23.7 J** for 0.8B v2, measured by integrating `current_now` × `voltage_now`
+(`training/scripts/phone_energy_eval.sh`). The 0.8B is about twice as cheap, mostly
+because its prefill is 2–3× faster. The percentage gauge disagrees with the integration
+and is treated as unreliable under sustained load.
+
 Battery readings are 1%-step and were not brightness- or governor-controlled; treat
 them as approximate. The 1.7B average is dominated by a cold-start chunk (12 points);
 its warm chunks cost 0.04–0.06%/query. The 0.8B model is about twice as fast per token

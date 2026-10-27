@@ -70,6 +70,12 @@ are the base models.
 - A fresh held-out set exists: `training/data/heldout-40.json` (40 phrasings written
   after training, no exact overlap with training data or the frozen tests). The 1.7B
   model scores **34/40 (85%)**; the 26-query subset is no longer the primary signal.
+- Targeted v7 data (831 rows, 38% negatives) was generated, trained to ~90 iterations
+  through two watchdog crashes, and evaluated on the new final held-out set:
+  **32/40 (80%)** vs **33/40 (82%)** for v1. The gate (+2 on dev) was not met, so v1
+  stays; the experiment is archived in `training/runs/pilot-1.7b-v7*` and
+  `training/RESULTS.md`. The semantic confusions (mute/nosleep inversion, step vs
+  absolute volume, colloquial `wifi_status`) did not change.
 - Checkpoint 150 of the 1.7B run scored 22/26 in MLX BF16 but only 18/26 after GGUF
   export and 32/40 on held-out, so the 100-iteration adapter stays the best model.
 - Training on the M2 Pro is unstable: the macOS GPU watchdog kills long Metal steps
@@ -90,9 +96,12 @@ are the base models.
   load 5 s, battery 69 → 58%.
 - Integrate the compact prompt/tool schema into the agent (or a separate compact runner)
   so the phone can use the tuned model at inference.
-- Retry targeted training (v6 data) with checkpoint resume, aimed at the held-out
-  failures: `nosleep`/`mute` inversion, `service_logs` arguments, step vs absolute
-  volume, `wifi_status` phrasing.
+- Energy measured (2026-10-27): 1.7B **49.9 J/query**, 0.8B **23.7 J/query** on a cold
+  30-query batch; the 0.8B is ~2× cheaper, mostly due to faster prefill. The battery
+  percentage gauge is unreliable under load (13 points in 4.6 min), so joules are the
+  metric. Warm/slot-cache measurement is still pending.
+- Further accuracy work on the semantic confusions needs a different approach than more
+  paraphrases: consider a larger base model or rule-based post-checks in the agent.
 - Update `training/RESULTS.md` and `PLAN.md` with the final choice.
 
 Detailed tasks, gates and the decision rule: `PLAN.md`.

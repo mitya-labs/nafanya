@@ -1,0 +1,281 @@
+[
+  {
+    "id": 1,
+    "q": "сколько осталось заряда в телефоне",
+    "tool": "battery_status",
+    "args": {}
+  },
+  {
+    "id": 2,
+    "q": "батарея садится или заряжается",
+    "tool": "battery_status",
+    "args": {}
+  },
+  {
+    "id": 3,
+    "q": "покажи процент заряда",
+    "tool": "battery_status",
+    "args": {}
+  },
+  {
+    "id": 4,
+    "q": "выставь яркость на 30",
+    "tool": "brightness_set",
+    "args": {
+      "percent": 30
+    }
+  },
+  {
+    "id": 5,
+    "q": "яркость 95 процентов",
+    "tool": "brightness_set",
+    "args": {
+      "percent": 95
+    }
+  },
+  {
+    "id": 6,
+    "q": "сделай экран ярче на шаг",
+    "tool": "brightness_step",
+    "args": {
+      "direction": "up"
+    }
+  },
+  {
+    "id": 7,
+    "q": "чуть приглуши экран",
+    "tool": "brightness_step",
+    "args": {
+      "direction": "down"
+    }
+  },
+  {
+    "id": 8,
+    "q": "включи беззвучный режим",
+    "tool": "mute_set",
+    "args": {
+      "mode": "on"
+    }
+  },
+  {
+    "id": 9,
+    "q": "включи звук снова",
+    "tool": "mute_set",
+    "args": {
+      "mode": "off"
+    }
+  },
+  {
+    "id": 10,
+    "q": "не гаси экран, я читаю",
+    "tool": "nosleep_set",
+    "args": {
+      "mode": "on"
+    }
+  },
+  {
+    "id": 11,
+    "q": "пускай экран гаснет когда хочет",
+    "tool": "nosleep_set",
+    "args": {
+      "mode": "off"
+    }
+  },
+  {
+    "id": 12,
+    "q": "что в журнале NetworkManager",
+    "tool": "service_logs",
+    "args": {
+      "unit": "NetworkManager"
+    }
+  },
+  {
+    "id": 13,
+    "q": "последние 25 строк лога bluetooth",
+    "tool": "service_logs",
+    "args": {
+      "unit": "bluetooth",
+      "lines": 25
+    }
+  },
+  {
+    "id": 14,
+    "q": "глянь логи power-profiles-daemon",
+    "tool": "service_logs",
+    "args": {
+      "unit": "power-profiles-daemon"
+    }
+  },
+  {
+    "id": 15,
+    "q": "рестартни systemd-resolved",
+    "tool": "service_restart",
+    "args": {
+      "unit": "systemd-resolved"
+    }
+  },
+  {
+    "id": 16,
+    "q": "сделай рестарт ModemManager",
+    "tool": "service_restart",
+    "args": {
+      "unit": "ModemManager"
+    }
+  },
+  {
+    "id": 17,
+    "q": "что за службы запущены",
+    "tool": "services_running",
+    "args": {}
+  },
+  {
+    "id": 18,
+    "q": "перечисли активные сервисы",
+    "tool": "services_running",
+    "args": {}
+  },
+  {
+    "id": 19,
+    "q": "громкость на сколько выставлена",
+    "tool": "volume_get",
+    "args": {}
+  },
+  {
+    "id": 20,
+    "q": "что по громкости",
+    "tool": "volume_get",
+    "args": {}
+  },
+  {
+    "id": 21,
+    "q": "поставь звук на 55",
+    "tool": "volume_set",
+    "args": {
+      "percent": 55
+    }
+  },
+  {
+    "id": 22,
+    "q": "громкость 20 процентов",
+    "tool": "volume_set",
+    "args": {
+      "percent": 20
+    }
+  },
+  {
+    "id": 23,
+    "q": "добавь звука",
+    "tool": "volume_step",
+    "args": {
+      "direction": "up"
+    }
+  },
+  {
+    "id": 24,
+    "q": "сделай тише",
+    "tool": "volume_step",
+    "args": {
+      "direction": "down"
+    }
+  },
+  {
+    "id": 25,
+    "q": "вайфай Keenetic-9135, переключись",
+    "tool": "wifi_connect",
+    "args": {
+      "connection": "Keenetic-9135"
+    }
+  },
+  {
+    "id": 26,
+    "q": "какой вайфай активен",
+    "tool": "wifi_status",
+    "args": {}
+  },
+  {
+    "id": 27,
+    "q": "вайфай в порядке?",
+    "tool": "wifi_status",
+    "args": {}
+  },
+  {
+    "id": 28,
+    "q": "яркость на 75",
+    "tool": "brightness_set",
+    "args": {
+      "percent": 75
+    }
+  },
+  {
+    "id": 29,
+    "q": "активируй bluetooth",
+    "tool": null,
+    "args": {}
+  },
+  {
+    "id": 30,
+    "q": "выключи wifi",
+    "tool": null,
+    "args": {}
+  },
+  {
+    "id": 31,
+    "q": "отправь смс маме",
+    "tool": null,
+    "args": {}
+  },
+  {
+    "id": 32,
+    "q": "время подскажи",
+    "tool": null,
+    "args": {}
+  },
+  {
+    "id": 33,
+    "q": "запусти youtube",
+    "tool": null,
+    "args": {}
+  },
+  {
+    "id": 34,
+    "q": "сними скриншот экрана",
+    "tool": null,
+    "args": {}
+  },
+  {
+    "id": 35,
+    "q": "рестартни ssh-демон",
+    "tool": null,
+    "args": {}
+  },
+  {
+    "id": 36,
+    "q": "хвост журнала sshd",
+    "tool": null,
+    "args": {}
+  },
+  {
+    "id": 37,
+    "q": "останови ModemManager",
+    "tool": null,
+    "args": {}
+  },
+  {
+    "id": 38,
+    "q": "останови вообще все службы",
+    "tool": null,
+    "args": {}
+  },
+  {
+    "id": 39,
+    "q": "умножь 12 на 9",
+    "tool": null,
+    "args": {}
+  },
+  {
+    "id": 40,
+    "q": "что за погода ожидается завтра",
+    "tool": null,
+    "args": {}
+  }
+]

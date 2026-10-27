@@ -25,6 +25,7 @@ The 148-query set is `../kuzya/tests/cases-all.json`.
 | nafanya-1.7b v6 | 637 rows | compact + unsupported list | Qwen3-1.7B LoRA 8L r16 | not run | not run | targeted v6 data; crashed at iteration 7 before a checkpoint |
 | nafanya-1.7b v2 ckpt150 GGUF F16 | 610 rows | compact + unsupported list | merged GGUF | 18/26 (69%) | not run | MLX BF16 scored 22/26 on the same checkpoint: GGUF runtime differs |
 | nafanya-1.7b v2 ckpt150 GGUF Q4_K_M | 610 rows | compact + unsupported list | merged + quantized | 18/26 (69%) | not run | held-out 32/40 (80%); quantization changed nothing vs F16 |
+| nafanya-1.7b v7 | 831 rows (v5 + 221 targeted) | compact + unsupported list | Qwen3-1.7B LoRA 8L r16 | 35/40 dev MLX (88%), 34/40 dev GGUF (85%) | not run | ~90 iterations after a watchdog crash and resume; final held-out v2 32/40 (80%) vs 33/40 for v1 — gate not met |
 | nafanya-1.7b v1 GGUF Q4 held-out | 610 rows | compact + unsupported list | merged + quantized | — | — | held-out 40: **34/40 (85%)**, args 32/40 (80%) |
 
 ## Observations
@@ -83,3 +84,48 @@ a 2× RAM cost.
 Chunked battery readings are coarse (1% steps) and were not brightness- or
 governor-controlled; treat them as approximate. The 1.7B cold-start chunk cost 12
 points, while its warm chunks cost 0.04–0.06%/query.
+
+## v7 targeted experiment (2026-10-27)
+
+Goal: fix the stable misses without touching the frozen sets. 40 targeted seeds and 8
+negative seeds were written by the teacher, then expanded with 164 + 43 paraphrases;
+after filtering rows with token Jaccard ≥ 0.8 against `cases*.json`, `heldout-40` and
+`heldout-v2`, the merged dataset has 831 rows (38% negatives).
+
+Training was unstable again: the macOS GPU watchdog killed the run at iteration 50, and
+a resumed run at iteration 40 more (~90 total). Results, GGUF Q4_K_M, same runtime:
+
+| Model | heldout-v2 (final) | heldout-40 (dev) |
+|---|---|---|
+| nafanya-1.7b v1 | **33/40 (82%)**, args 32/40 (80%) | 34/40 (85%), args 32/40 (80%) |
+| nafanya-1.7b v7 | 32/40 (80%), args 31/40 (78%) | 34/40 (85%), args 33/40 (82%) |
+
+The gate (+2 points on the dev set) was not met, and v7 is one case worse on the final
+set. The targeted data did not change the semantic confusions: `mute_set` and
+`nosleep_set` on/off inversion, step vs absolute volume, and `wifi_status` on colloquial
+phrasings remain. Decision: keep **nafanya-1.7b v1**; v7 stays as an archived experiment
+(`training/runs/pilot-1.7b-v7`, `pilot-1.7b-v7b`).
+
+The final test set `heldout-v2.json` was written independently and never used for
+training or checkpoint selection.
+
+## Energy per query (2026-10-27)
+
+Protocol: `training/scripts/phone_energy_eval.sh`, 30 queries (`cases30.json`, the first
+30 frozen cases), screen idle, no slot cache — every run pays the cold prompt prefill.
+Power is sampled at 1 Hz from `current_now` × `voltage_now` and integrated over the
+active window; the idle baseline is about 0.67 W.
+
+| Model | Wall time | J per query (total) | J per query (above idle) | Accuracy on 30 |
+|---|---:|---:|---:|---:|
+| nafanya-1.7b Q4_K_M | 275 s | **49.9** | 43.9 | 29/30 (97%) |
+| nafanya-0.8b v2 Q4_K_M | 130 s | **23.7** | — | 27/30 (90%) |
+
+The 0.8B model costs about half the energy per query, mostly because its prompt prefill
+and generation are 2–3× faster. The cold prefill dominates a 30-query batch: on the
+phone the 1100-token prompt takes about 2.5 min on 1.7B. Production restores the slot
+cache, so steady-state cost per query is lower than these numbers.
+
+Caveat: the battery percentage gauge disagrees with the integration (it dropped 13
+points in 4.6 min during the 1.7B run, which would imply about 25 W — impossible for
+this phone). The gauge is treated as unreliable under sustained load; use joules.
